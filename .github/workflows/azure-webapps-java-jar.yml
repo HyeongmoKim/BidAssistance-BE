@@ -4,6 +4,7 @@ env:
   AZURE_WEBAPP_NAME: Aivle08TKBE
   JAVA_VERSION: '17'
   DISTRIBUTION: 'temurin'
+  APP_PATH: BidAssistance-BE/BE/aivleTK
 
 on:
   push:
@@ -20,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Java version
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
@@ -28,19 +29,21 @@ jobs:
           cache: 'gradle'
 
       - name: Grant execute permission for Gradle wrapper
+        working-directory: ${{ env.APP_PATH }}
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
+        working-directory: ${{ env.APP_PATH }}
         run: ./gradlew clean build -x test
 
-      # Spring Boot일 때 plain.jar 제외하고 업로드
+      # bootJar만 올리기 위해 plain.jar 제외
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
           path: |
-            ${{ github.workspace }}/build/libs/*.jar
-            !${{ github.workspace }}/build/libs/*-plain.jar
+            ${{ env.APP_PATH }}/build/libs/*.jar
+            !${{ env.APP_PATH }}/build/libs/*-plain.jar
 
   deploy:
     permissions:
