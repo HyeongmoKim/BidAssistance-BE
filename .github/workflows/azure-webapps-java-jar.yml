@@ -4,7 +4,7 @@ env:
   AZURE_WEBAPP_NAME: Aivle08TKBE
   JAVA_VERSION: '17'
   DISTRIBUTION: 'temurin'
-  APP_PATH: BidAssistance-BE/BE/aivleTK
+  APP_PATH: /BE/aivleTK
 
 on:
   push:
