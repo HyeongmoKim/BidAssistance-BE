@@ -1,7 +1,7 @@
 name: Build and deploy JAR app to Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: Aivle08TKBE
+  AZURE_WEBAPP_NAME: AivleTK08BE
   JAVA_VERSION: '17'
   DISTRIBUTION: 'temurin'
   APP_PATH: BE/aivleTK
